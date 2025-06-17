@@ -1,14 +1,28 @@
-# Ignore Visual Studio folders
+# Visual Studio
 .vs/
-*.vsidx
-*.vscode/
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
 *.VC.db
 *.VC.VC.opendb
+*.cache
+*.ilk
+*.log
+*.tlog/
+*.obj
+*.pdb
+*.exe.recipe
+*.lastbuildstate
+*.idb
 
-# Ignore build/output folders
+# Build folders
+x64/
+Debug/
+Release/
 bin/
 obj/
+
+# Temporary files
+*.tmp
+*.log
