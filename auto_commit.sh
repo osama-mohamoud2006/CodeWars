@@ -1,26 +1,37 @@
 #!/bin/bash
 
-# المجلد الأساسي للمشروع
+# مسار المشروع الأساسي
 project_dir="E:/projects/c++ course/ELzero course c++ level one"
 cd "$project_dir" || exit
 
-# سحب آخر التعديلات من Git
-git pull origin main
+# ملف تاريخ الإنشاء
+created_file=".created_at"
 
-# حفظ نسخة من المشروع في فولدر باسم تاريخ الإنشاء (أول مرة بس)
+# إنشاء التاريخ لو المشروع جديد ومفيش ملف
+if [ ! -f "$created_file" ]; then
+    created_date=$(date '+%Y-%m-%d_%H-%M-%S')
+    echo "$created_date" > "$created_file"
+    echo "🆕 Created project date: $created_date"
+else
+    created_date=$(cat "$created_file")
+    echo "📅 Project originally created at: $created_date"
+fi
+
+# إنشاء Snapshot في مجلد خاص
 snapshot_dir="E:/projects/_snapshots"
-mkdir -p "$snapshot_dir"
-
-# أول مرة فقط نحفظ نسخة بتاريخ اليوم لو مش موجود فولدر بتاريخ النهاردة
-today=$(date '+%Y-%m-%d')
-snapshot_path="$snapshot_dir/$today"
+snapshot_path="$snapshot_dir/$created_date"
 
 if [ ! -d "$snapshot_path" ]; then
-  cp -r "$project_dir" "$snapshot_path"
-  echo "📁 Snapshot created at: $snapshot_path"
+    mkdir -p "$snapshot_path"
+    cp -r "$project_dir" "$snapshot_path"
+    echo "📁 Snapshot created at: $snapshot_path"
+else
+    echo "📦 Snapshot already exists at: $snapshot_path"
 fi
 
 # Git commands
+git pull origin main
+
 git add -u
 git add .
 
