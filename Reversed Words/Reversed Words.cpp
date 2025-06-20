@@ -28,9 +28,9 @@ using namespace std;
     }
 
     for(int i = word.length(); i >= 0; i--) { // print the words in reverse order
-        if (arr[i] != "") {
-            cout  << arr[i] << " ";
-        }
+        
+            cout  << arr[i]<<" ";
+        
 	}
     return 0;
 }
